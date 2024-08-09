@@ -2,6 +2,7 @@ import 'package:dota_2_beta_timer/core/timer.dart';
 import 'package:dota_2_beta_timer/ui/widgets/tab_column.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hotkey_manager/hotkey_manager.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({
@@ -27,8 +28,6 @@ class _MainScreenState extends State<MainScreen> {
   late String aegisTime;
   late String aegisTurboTime;
 
-  static const platform = MethodChannel('hotkey');
-
   @override
   void initState() {
     super.initState();
@@ -43,7 +42,32 @@ class _MainScreenState extends State<MainScreen> {
     aegisTime = widget.aegisTimer.time;
     aegisTurboTime = widget.aegisTurboTimer.time;
 
-    _registerHotKey();
+    final hotKeyP = HotKey(
+      key: PhysicalKeyboardKey.keyP,
+      modifiers: [HotKeyModifier.alt],
+    );
+
+    final hotKeyT = HotKey(
+      key: PhysicalKeyboardKey.keyT,
+      modifiers: [HotKeyModifier.alt],
+    );
+
+    hotKeyManager.register(
+      hotKeyP,
+      keyDownHandler: _keyDownHandlerP,
+    );
+    hotKeyManager.register(
+      hotKeyT,
+      keyDownHandler: _keyDownHandlerT,
+    );
+  }
+
+  void _keyDownHandlerP(HotKey hotKey) {
+    widget.timer.start();
+  }
+
+  void _keyDownHandlerT(HotKey hotKey) {
+    widget.turboTimer.start();
   }
 
   @override
@@ -53,14 +77,6 @@ class _MainScreenState extends State<MainScreen> {
     widget.aegisTimer.removeListener(_updateAegisTime);
     widget.aegisTurboTimer.removeListener(_updateAegisTurboTime);
     super.dispose();
-  }
-
-  Future<void> _registerHotKey() async {
-    try {
-      await platform.invokeMethod('registerHotKey');
-    } on PlatformException catch (e) {
-      print("Failed to register hotkey: '${e.message}'.");
-    }
   }
 
   void _updateTime() {
@@ -132,7 +148,7 @@ class _MainScreenState extends State<MainScreen> {
             children: [
               Expanded(
                 child: TabColumn(
-                  welcomeText: 'Dota 2 Timer',
+                  welcomeText: 'Dota 2 Timer (alt+p)',
                   startText: 'start',
                   pauseText: 'pause',
                   resumeText: 'resume',
@@ -150,7 +166,7 @@ class _MainScreenState extends State<MainScreen> {
               const Divider(thickness: 0.5),
               Expanded(
                 child: TabColumn(
-                  welcomeText: 'Dota 2 Turbo Timer',
+                  welcomeText: 'Dota 2 Turbo Timer (alt+t)',
                   startText: 'start',
                   pauseText: 'pause',
                   resumeText: 'resume',

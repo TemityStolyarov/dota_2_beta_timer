@@ -1,9 +1,13 @@
 import 'package:dota_2_beta_timer/core/timer.dart';
 import 'package:dota_2_beta_timer/ui/screens/main_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:hotkey_manager/hotkey_manager.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
+  await hotKeyManager.unregisterAll();
+  
   final timer = Timer(
     name: 'Timer',
     isTurbo: false,
