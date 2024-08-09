@@ -81,52 +81,52 @@ class TabColumn extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 2),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                  onPressed: startTimer,
-                  child: Text(
-                    startText,
-                    style: const TextStyle(
-                      color: Colors.blueGrey,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 12),
-                TextButton(
-                  onPressed: pauseTimer,
-                  style: ButtonStyle(
-                    overlayColor: MaterialStatePropertyAll(
-                      Colors.yellow.shade800.withOpacity(0.15),
-                    ),
-                  ),
-                  child: Text(
-                    pauseText,
-                    style: TextStyle(
-                      color: Colors.yellow.shade800.withOpacity(1),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 12),
-                TextButton(
-                  onPressed: startTimer,
-                  style: ButtonStyle(
-                    overlayColor: MaterialStatePropertyAll(
-                      Colors.green.shade900.withOpacity(0.15),
-                    ),
-                  ),
-                  child: Text(
-                    resumeText,
-                    style: TextStyle(
-                      color: Colors.green.shade900.withOpacity(1),
-                    ),
-                  ),
-                ),
-              ],
-            ),
           ],
+          const SizedBox(height: 2),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: startTimer,
+                child: Text(
+                  startText,
+                  style: const TextStyle(
+                    color: Colors.blueGrey,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 12),
+              TextButton(
+                onPressed: pauseTimer,
+                style: ButtonStyle(
+                  overlayColor: MaterialStatePropertyAll(
+                    Colors.yellow.shade800.withOpacity(0.15),
+                  ),
+                ),
+                child: Text(
+                  pauseText,
+                  style: TextStyle(
+                    color: Colors.yellow.shade800.withOpacity(1),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 12),
+              TextButton(
+                onPressed: startTimer,
+                style: ButtonStyle(
+                  overlayColor: MaterialStatePropertyAll(
+                    Colors.green.shade900.withOpacity(0.15),
+                  ),
+                ),
+                child: Text(
+                  resumeText,
+                  style: TextStyle(
+                    color: Colors.green.shade900.withOpacity(1),
+                  ),
+                ),
+              ),
+            ],
+          ),
           const SizedBox(height: 2),
           TextButton(
             onPressed: stopTimer,
