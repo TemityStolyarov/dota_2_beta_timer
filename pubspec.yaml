@@ -1,0 +1,44 @@
+name: dota_2_beta_timer
+description: 'timer for most important events in the game'
+publish_to: 'none'
+version: 1.0.0
+
+environment:
+  sdk: '>=3.3.3 <4.0.0'
+
+dependencies:
+  audioplayers: ^3.0.0
+  flutter:
+    sdk: flutter
+  logger: ^2.1.0
+  hotkey_manager: ^0.2.2
+  window_manager: ^0.2.9
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  assets:
+    - assets/sounds/1_TIER.mp3
+    - assets/sounds/2_TIER.mp3
+    - assets/sounds/3_TIER.mp3
+    - assets/sounds/4_TIER.mp3
+    - assets/sounds/5_TIER.mp3
+    - assets/sounds/AEGIS_60.mp3
+    - assets/sounds/AEGIS_30.mp3
+    - assets/sounds/AEGIS_END.mp3
+    - assets/sounds/BOUNTY.mp3
+    - assets/sounds/LOTUS.mp3
+    - assets/sounds/POWERUP.mp3
+    - assets/sounds/POWERUP_AND_BOUNTY.mp3
+    - assets/sounds/ROSHAN_UP_SOON.mp3
+    - assets/sounds/ROSHAN_UP.mp3
+    - assets/sounds/TORMENTOR_SOON.mp3
+    - assets/sounds/TORMENTOR.mp3
+    - assets/sounds/WISDOM_SOON.mp3
+    - assets/sounds/WISDOM.mp3
+    - assets/sounds/WELCOME.mp3
+
+  uses-material-design: true
