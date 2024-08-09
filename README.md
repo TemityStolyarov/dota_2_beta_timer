@@ -1,6 +1,6 @@
 # Dota 2 Beta Timer
 
-## what is this app for?
+## What is this app for?
 
 - Always wanted to get an in-game macro game action navigator?
 - Did you forget to pick up lotuses and wisdom runes?
@@ -14,4 +14,4 @@ It is not a cheat or a software that gives an advantage
 
 ## Requirements
 
-Only russian language supported. Works exclusively on Windows
+Only Russian voice acting is supported. Works exclusively on Windows
