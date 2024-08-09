@@ -153,27 +153,19 @@ bool Win32Window::Show() {
   return ShowWindow(window_handle_, SW_SHOWNORMAL);
 }
 
-constexpr int HOTKEY_ID = 1;
-constexpr UINT MOD_ALT = 0x0001; // Модификатор Alt
-constexpr UINT VK_P = 0x0050;    // Виртуальный ключ P
-
 // static
 LRESULT CALLBACK Win32Window::WndProc(HWND const window,
                                       UINT const message,
                                       WPARAM const wparam,
                                       LPARAM const lparam) noexcept {
   if (message == WM_NCCREATE) {
-  auto window_struct = reinterpret_cast<CREATESTRUCT*>(lparam);
-  SetWindowLongPtr(window, GWLP_USERDATA,
-                   reinterpret_cast<LONG_PTR>(window_struct->lpCreateParams));
+    auto window_struct = reinterpret_cast<CREATESTRUCT*>(lparam);
+    SetWindowLongPtr(window, GWLP_USERDATA,
+                     reinterpret_cast<LONG_PTR>(window_struct->lpCreateParams));
 
-  auto that = static_cast<Win32Window*>(window_struct->lpCreateParams);
-  EnableFullDpiSupportIfAvailable(window);
-  that->window_handle_ = window;
-
-  // Регистрируем горячую клавишу
-  RegisterHotKey(window, HOTKEY_ID, MOD_ALT, VK_P);
-
+    auto that = static_cast<Win32Window*>(window_struct->lpCreateParams);
+    EnableFullDpiSupportIfAvailable(window);
+    that->window_handle_ = window;
   } else if (Win32Window* that = GetThisFromHandle(window)) {
     return that->MessageHandler(window, message, wparam, lparam);
   }
@@ -187,15 +179,6 @@ Win32Window::MessageHandler(HWND hwnd,
                             WPARAM const wparam,
                             LPARAM const lparam) noexcept {
   switch (message) {
-    case WM_HOTKEY:
-      if (wparam == HOTKEY_ID) {
-        // Здесь вызываем метод в Flutter через MethodChannel
-        FlutterDesktopMessenger* messenger =
-            flutter_controller_->messenger();
-        FlutterDesktopMessengerSend(messenger, "hotkey", nullptr, 0);
-      }
-      return 0;
-
     case WM_DESTROY:
       window_handle_ = nullptr;
       Destroy();
