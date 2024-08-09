@@ -1,7 +1,7 @@
 name: dota_2_beta_timer
 description: 'timer for most important events in the game'
 publish_to: 'none'
-version: 1.0.0
+version: 1.2.0
 
 environment:
   sdk: '>=3.3.3 <4.0.0'
