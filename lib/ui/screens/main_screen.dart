@@ -43,7 +43,7 @@ class _MainScreenState extends State<MainScreen> {
     aegisTime = widget.aegisTimer.time;
     aegisTurboTime = widget.aegisTurboTimer.time;
 
-    _registerHotKey();
+    platform.setMethodCallHandler(_handleHotkey);
   }
 
   @override
@@ -55,11 +55,14 @@ class _MainScreenState extends State<MainScreen> {
     super.dispose();
   }
 
-  Future<void> _registerHotKey() async {
-    try {
-      await platform.invokeMethod('registerHotKey');
-    } on PlatformException catch (e) {
-      print("Failed to register hotkey: '${e.message}'.");
+  Future<void> _handleHotkey(MethodCall call) async {
+    switch (call.method) {
+      case 'hotkey':
+        // Ваш код для обработки нажатия клавиш
+        print("Alt + P was pressed!");
+        break;
+      default:
+        throw MissingPluginException('Неизвестный метод: ${call.method}');
     }
   }
 
